@@ -234,9 +234,20 @@ const Invoices = () => {
         }}
       >
         <NoData />
-        <p style={{ padding: "40px", color: "gray", textAlign: "center" }}>
-          Noch keine Rechnung. Klicken Sie auf die Schaltfläche, um eine
-          Rechnung zu erstellen{" "}
+        <Box sx={{ m: 1 }}>
+          <Button
+            color="primary"
+            onClick={() => (window.location.href = "/invoice")}
+            variant="contained"
+            size="lg"
+            active
+          >
+            Rechnung erstellen
+          </Button>
+        </Box>
+        <p style={{ padding: "40px", color: "gray" }}>
+          Es gibt nichts zu zeigen. Klicken sie auf die schaltfläche, um mit der
+          erstellung zu beginnen.
         </p>
       </div>
     );

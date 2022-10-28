@@ -140,7 +140,7 @@ const Login = () => {
           {/*</Button>
             </Grid>
           </Grid>*/}
-          <Link to="forgot">
+          {/*<Link to="forgot">
             <p
               style={{
                 textAlign: "center",
@@ -150,7 +150,7 @@ const Login = () => {
             >
               Passwort vergessen?
             </p>
-          </Link>
+            </Link>*/}
         </form>
       </Paper>
     </Container>
