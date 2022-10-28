@@ -41,15 +41,15 @@ import InvoiceType from "./InvoiceType";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { getProduct } from "../../actions/productActions";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+//import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,11 +95,11 @@ const Invoice = () => {
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
   //buradaki birimler degistirilecek
-  const [units, setUnits]=useState(["QM","Stück","km","litre"])
-  const [taxes, setTaxes]=useState(["ust 19", "ust 7", "%18", "keine"])
-  const [taxValues, setTaxValues]=useState([19,7,18,0])
+  const [units, setUnits] = useState(["QM", "Stück", "km", "litre"]);
+  const [taxes, setTaxes] = useState(["ust 19", "ust 7", "%18", "keine"]);
+  const [taxValues, setTaxValues] = useState([19, 7, 18, 0]);
 
-  const [enteredUnit, setEnteredUnit]=useState('');
+  const [enteredUnit, setEnteredUnit] = useState("");
 
   useEffect(() => {
     getTotalCount();
@@ -188,15 +188,15 @@ const Invoice = () => {
     values[index][e.target.name] = e.target.value;
     setInvoiceData({ ...invoiceData, items: values });
   };
-  
+
   const inputChange = (e, newInputValue, index) => {
     const values = [...invoiceData.items];
-    
+
     values[index]["itemName"] = newInputValue;
     const inputProduct = products.find((obj) => {
       return obj.name === newInputValue;
     });
-    
+
     if (inputProduct !== undefined) {
       values[index]["unitPrice"] = inputProduct.price;
       values[index]["selectedFiles"] = inputProduct.selectedFiles;
@@ -237,7 +237,15 @@ const Invoice = () => {
       ...prevState,
       items: [
         ...prevState.items,
-        { itemName: "",selectedFiles: "", unitPrice: "", quantity: "", unit: "", discount: "", amount: "" },
+        {
+          itemName: "",
+          selectedFiles: "",
+          unitPrice: "",
+          quantity: "",
+          unit: "",
+          discount: "",
+          amount: "",
+        },
       ],
     }));
   };
@@ -247,10 +255,10 @@ const Invoice = () => {
     values.splice(index, 1);
     setInvoiceData((prevState) => ({ ...prevState, values }));
   };
-  console.log(invoiceData)
+  console.log(invoiceData);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (invoice) {
       dispatch(
         updateInvoice(invoice._id, {
@@ -293,41 +301,41 @@ const Invoice = () => {
     // setInvoiceData(initialState)
   };
 
-//Tax functions
-const [openTax, setOpenTax] = React.useState(false);
-const [enteredTax, setEnteredTax]=useState("");
-const [enteredTaxValue, setEnteredTaxValue]=useState();
+  //Tax functions
+  const [openTax, setOpenTax] = React.useState(false);
+  const [enteredTax, setEnteredTax] = useState("");
+  const [enteredTaxValue, setEnteredTaxValue] = useState();
 
-const taxOnChange=(index, event)=>{
-  const taxValue=taxValues[event.target.value]
-  const values = [...invoiceData.items];
-  values[index]["rates"] = taxValue;
-  setInvoiceData({ ...invoiceData, items: values });
-}
-const handleTaxClickOpen=()=>{
-  setOpenTax(true);
-}
-const handleTaxClose=()=>{
-  setOpenTax(false);
-}
-const addTax=()=>{
-  setTaxes([...taxes, enteredTax]);
-  setTaxValues([...taxValues, enteredTaxValue]);
-  setOpenTax(false);
-}
-const addTaxChangeHandler=(event)=>{
-  setEnteredTax(event.target.value);
-}
-const addTaxValueChangeHandler=(event)=>{
-  setEnteredTaxValue(event.target.value);
-}
+  const taxOnChange = (index, event) => {
+    const taxValue = taxValues[event.target.value];
+    const values = [...invoiceData.items];
+    values[index]["rates"] = taxValue;
+    setInvoiceData({ ...invoiceData, items: values });
+  };
+  const handleTaxClickOpen = () => {
+    setOpenTax(true);
+  };
+  const handleTaxClose = () => {
+    setOpenTax(false);
+  };
+  const addTax = () => {
+    setTaxes([...taxes, enteredTax]);
+    setTaxValues([...taxValues, enteredTaxValue]);
+    setOpenTax(false);
+  };
+  const addTaxChangeHandler = (event) => {
+    setEnteredTax(event.target.value);
+  };
+  const addTaxValueChangeHandler = (event) => {
+    setEnteredTaxValue(event.target.value);
+  };
 
-//Unit functions
-  const unitOnChange=(index, event)=>{
+  //Unit functions
+  const unitOnChange = (index, event) => {
     const values = [...invoiceData.items];
     values[index]["unit"] = event.target.value;
     setInvoiceData({ ...invoiceData, items: values });
-  }
+  };
   const [openUnit, setOpenUnit] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -338,14 +346,14 @@ const addTaxValueChangeHandler=(event)=>{
     setOpenUnit(false);
   };
 
-  const addUnit=()=>{
+  const addUnit = () => {
     setUnits([...units, enteredUnit]);
     setOpenUnit(false);
-  }
+  };
 
-  const addUnitChangeHandler=(event)=>{
+  const addUnitChangeHandler = (event) => {
     setEnteredUnit(event.target.value);
-  }
+  };
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -595,9 +603,7 @@ const addTaxValueChangeHandler=(event)=>{
               <TableBody>
                 {invoiceData.items.map((itemField, index) => (
                   <TableRow key={index}>
-                    <TableCell>
-                      {index+1}
-                    </TableCell>
+                    <TableCell>{index + 1}</TableCell>
                     <TableCell scope="row" style={{ width: "40%" }}>
                       {/*<InputBase style={{width: '100%'}} outline="none" sx={{ ml: 1, flex: 1 }} type="text" name="itemName" onChange={e => handleChange(index, e)} value={itemField.itemName} placeholder="Item name or description" />*/}
                       <Autocomplete
@@ -611,6 +617,7 @@ const addTaxValueChangeHandler=(event)=>{
                             label="Produktpunkt wählen"
                             margin="normal"
                             variant="outlined"
+                            style={{ width: 150 }}
                           />
                         )}
                         //value={itemField.itemName}
@@ -622,9 +629,12 @@ const addTaxValueChangeHandler=(event)=>{
                         //Listede olmayan bir şeyin yazılmasını istiyorsan yukarıdaki kodu yorum satırından çıkar
                       />
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" width="150" height="100">
                       <img
-                        src={itemField.selectedFiles}
+                        src={
+                          itemField.selectedFiles ||
+                          "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+                        }
                         alt=""
                         width="150"
                         height="100"
@@ -641,105 +651,105 @@ const addTaxValueChangeHandler=(event)=>{
                         onChange={(e) => handleChange(index, e)}
                         value={itemField.quantity}
                         placeholder="0"
+                        textAlign="center"
+                        align="center"
                       />{" "}
                     </TableCell>
                     <TableCell>
                       {" "}
-
-                      
                       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small">Einheit</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        label="Einheit"
-        onChange={(e)=>unitOnChange(index, e)}
-      >
-        {
-          units.map((unit, index)=>
-            <MenuItem value={unit} id={index} >{unit}</MenuItem>
-          )
-        }
-        <Button variant="contained" size="small" onClick={handleClickOpen}>
-    Hinzufügen
-      </Button>
-      </Select>
-    </FormControl>
-    
-    <Dialog open={openUnit} onClose={handleClose}>
-        <DialogTitle>Hinzufügen</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="einheit"
-            label="Einheit"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={ addUnitChangeHandler }
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Abbrechen</Button>
-          <Button onClick={addUnit}>Hinzufügen Einheit</Button>
-        </DialogActions>
-      </Dialog>
-      </TableCell>
-      <TableCell align="right">
+                        <InputLabel id="demo-select-small">Einheit</InputLabel>
+                        <Select
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Einheit"
+                          onChange={(e) => unitOnChange(index, e)}
+                        >
+                          {units.map((unit, index) => (
+                            <MenuItem value={unit} id={index}>
+                              {unit}
+                            </MenuItem>
+                          ))}
+                          <Button
+                            variant="contained"
+                            size="small"
+                            onClick={handleClickOpen}
+                          >
+                            Hinzufügen
+                          </Button>
+                        </Select>
+                      </FormControl>
+                      <Dialog open={openUnit} onClose={handleClose}>
+                        <DialogTitle>Hinzufügen</DialogTitle>
+                        <DialogContent>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="einheit"
+                            label="Einheit"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            onChange={addUnitChangeHandler}
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>Abbrechen</Button>
+                          <Button onClick={addUnit}>Hinzufügen Einheit</Button>
+                        </DialogActions>
+                      </Dialog>
+                    </TableCell>
+                    <TableCell align="right">
                       {" "}
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        
-
-      <InputLabel id="demo-select-small">Steuer</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        label="steuer"
-        onChange={(e)=>taxOnChange(index, e)}
-      >
-        
-        {
-          taxes.map((tax, index)=>
-            <MenuItem value={index} >{tax}</MenuItem>
-          )
-        }
-        <Button variant="contained" size="small" onClick={ handleTaxClickOpen }>
-    Hinzufügen
-      </Button>
-      </Select>
-    </FormControl>
-
-    <Dialog open={ openTax } onClose={ handleTaxClose }>
-        <DialogTitle>Hinzufügen</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="tax"
-            label="Steuer"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={ addTaxChangeHandler }
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="tax_value"
-            label="Steuerwert"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={ addTaxValueChangeHandler }
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleTaxClose}>Abbrechen</Button>
-          <Button onClick={addTax}>Hinzufügen Steuer</Button>
-        </DialogActions>
-      </Dialog>
-
+                      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                        <InputLabel id="demo-select-small">Steuer</InputLabel>
+                        <Select
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="steuer"
+                          onChange={(e) => taxOnChange(index, e)}
+                        >
+                          {taxes.map((tax, index) => (
+                            <MenuItem value={index}>{tax}</MenuItem>
+                          ))}
+                          <Button
+                            variant="contained"
+                            size="small"
+                            onClick={handleTaxClickOpen}
+                          >
+                            Hinzufügen
+                          </Button>
+                        </Select>
+                      </FormControl>
+                      <Dialog open={openTax} onClose={handleTaxClose}>
+                        <DialogTitle>Hinzufügen</DialogTitle>
+                        <DialogContent>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="tax"
+                            label="Steuer"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            onChange={addTaxChangeHandler}
+                          />
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="tax_value"
+                            label="Steuerwert"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            onChange={addTaxValueChangeHandler}
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleTaxClose}>Abbrechen</Button>
+                          <Button onClick={addTax}>Hinzufügen Steuer</Button>
+                        </DialogActions>
+                      </Dialog>
                     </TableCell>
                     <TableCell align="right">
                       {" "}
@@ -771,15 +781,17 @@ const addTaxValueChangeHandler=(event)=>{
                         name="amount"
                         onChange={(e) => handleChange(index, e)}
                         value={
-                          ((itemField.quantity * itemField.unitPrice -
-                          (itemField.quantity *
-                            itemField.unitPrice  *
-                            itemField.discount) /
-                            100)*(itemField.rates/100))+(itemField.quantity * itemField.unitPrice -
-                              (itemField.quantity *
-                                itemField.unitPrice  *
-                                itemField.discount) /
-                                100)
+                          (itemField.quantity * itemField.unitPrice -
+                            (itemField.quantity *
+                              itemField.unitPrice *
+                              itemField.discount) /
+                              100) *
+                            (itemField.rates / 100) +
+                          (itemField.quantity * itemField.unitPrice -
+                            (itemField.quantity *
+                              itemField.unitPrice *
+                              itemField.discount) /
+                              100)
                         }
                         disabled
                       />{" "}
@@ -811,13 +823,13 @@ const addTaxValueChangeHandler=(event)=>{
         </div>
 
         <div className={styles.invoiceSummary}>
-          <div className={styles.summary}>Invoice Summary</div>
+          <div className={styles.summary}>Rechnung / Zusammenfassung</div>
           <div className={styles.summaryItem}>
-            <p>Sub total:</p>
+            <p>Zwischensumme: </p>
             <h4>{subTotal}</h4>
           </div>
           <div className={styles.summaryItem}>
-            <p>Total</p>
+            <p>Gesamt: </p>
             <h4 style={{ color: "black", fontSize: "18px", lineHeight: "8px" }}>
               {currency} {toCommas(total)}
             </h4>
@@ -827,14 +839,13 @@ const addTaxValueChangeHandler=(event)=>{
         <div className={styles.toolBar}>
           <Container>
             <Grid container>
-              <Grid item style={{ marginTop: "16px", marginRight: 10 }}>
-              </Grid>
+              <Grid item style={{ marginTop: "16px", marginRight: 10 }}></Grid>
               <Grid item style={{ marginRight: 10 }}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
-                    label="Due date"
+                    label="Datum Des Endes"
                     format="MM/dd/yyyy"
                     value={selectedDate}
                     onChange={handleDateChange}
@@ -844,30 +855,14 @@ const addTaxValueChangeHandler=(event)=>{
                   />
                 </MuiPickersUtilsProvider>
               </Grid>
-              <Grid item style={{ width: 270, marginRight: 10 }}>
-                <Autocomplete
-                  {...defaultProps}
-                  id="debug"
-                  debug
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Select currency"
-                      margin="normal"
-                    />
-                  )}
-                  value={currency.value}
-                  onChange={(event, value) => setCurrency(value.value)}
-                />
-              </Grid>
             </Grid>
           </Container>
         </div>
         <div className={styles.note}>
-          <h4>Note/Payment Info</h4>
+          <h4>Hinweis/Zahlungs Informationen</h4>
           <textarea
             style={{ border: "solid 1px #d6d6d6", padding: "10px" }}
-            placeholder="Not ekleyin."
+            placeholder="Es ist ein anmerkungsbereich."
             onChange={(e) =>
               setInvoiceData({ ...invoiceData, notes: e.target.value })
             }
@@ -886,7 +881,7 @@ const addTaxValueChangeHandler=(event)=>{
             className={classes.button}
             startIcon={<SaveIcon />}
           >
-            Save and Continue
+            Speichern und fortfahren
           </Button>
         </Grid>
       </form>

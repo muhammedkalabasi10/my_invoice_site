@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import styles from './Footer.module.css'
-import FabButton from '../Fab/Fab'
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import styles from "./Footer.module.css";
+//import FabButton from "../Fab/Fab";
 
 const Footer = () => {
-    const location = useLocation()
-    const [user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')))
+  const location = useLocation();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('profile')))
-    }, [location])
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
-    return (
-        <footer>
-            {user && (
-            <FabButton />
-            )}
-        </footer>
-    )
-}
+  return <footer></footer>;
+};
 
-export default Footer
+export default Footer;

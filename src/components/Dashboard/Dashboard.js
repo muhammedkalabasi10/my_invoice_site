@@ -10,6 +10,7 @@ import Chart from "./Chart";
 import moment from "moment";
 import { Check, Pie, Bag, Card, Clock, Frown } from "./Icons";
 import Spinner from "../Spinner/Spinner";
+import { Button, Box } from "@material-ui/core";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -95,8 +96,20 @@ const Dashboard = () => {
       >
         {/* <Spinner /> */}
         <Empty />
+        <Box sx={{ m: 1 }}>
+          <Button
+            color="primary"
+            onClick={() => (window.location.href = "/invoice")}
+            variant="contained"
+            size="lg"
+            active
+          >
+            Rechnung erstellen
+          </Button>
+        </Box>
         <p style={{ padding: "40px", color: "gray" }}>
-          Nothing to display. Click the plus icon to start creating
+          Es gibt nichts zu zeigen. Klicken sie auf die schaltfläche, um mit der
+          erstellung zu beginnen.
         </p>
       </div>
     );
@@ -227,7 +240,9 @@ const Dashboard = () => {
                       <button>{record?.paidBy?.charAt(0)}</button>
                     </td>
                     <td>{record.paidBy}</td>
-                    <td>{/*moment(record.datePaid).format("MMMM Do YYYY")*/}</td>
+                    <td>
+                      {/*moment(record.datePaid).format("MMMM Do YYYY")*/}
+                    </td>
                     <td>
                       <h3 style={{ color: "#00A86B", fontSize: "14px" }}>
                         {toCommas(record.amountPaid)}
