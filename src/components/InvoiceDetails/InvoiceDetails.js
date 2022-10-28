@@ -291,7 +291,7 @@ const InvoiceDetails = () => {
                 ))}
                 <tr>
                   <td colSpan="8">Gesamtbetrag</td>
-                  <td>{subTotal}</td>
+                  <td>{parseFloat(subTotal.toFixed(2))}</td>
                 </tr>
               </TableControl>
               <div className={styles.addButton}></div>
@@ -301,12 +301,12 @@ const InvoiceDetails = () => {
               <div className={styles.summary}>Gesamtbetrag der Rechnung</div>
               <div className={styles.summaryItem}>
                 <p>Zwischenrunde</p>
-                <h4>{subTotal}</h4>
+                <h4>{parseFloat(subTotal.toFixed(2))}</h4>
               </div>
               <div className={styles.summaryItem}>
                 <p>Bezahlt</p>
                 <h4>
-                  {currency} {toCommas(totalAmountReceived)}
+                  {currency} {parseFloat((totalAmountReceived).toFixed(2))}
                 </h4>
               </div>
 
@@ -319,7 +319,7 @@ const InvoiceDetails = () => {
                     lineHeight: "8px",
                   }}
                 >
-                  {currency} {toCommas(total - totalAmountReceived)}
+                  {currency} {parseFloat((total - totalAmountReceived).toFixed(2))}
                 </h4>
               </div>
             </div>
