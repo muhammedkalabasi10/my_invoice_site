@@ -46,7 +46,7 @@ const Header = () => {
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
-    history.push("/");
+    window.location.href="/";
     setUser(null);
   };
 
