@@ -330,7 +330,7 @@ const Invoices = () => {
                     style={tableStyle}
                     onClick={() => openInvoice(row._id)}
                   >
-                    {row.currency} {row.total ? toCommas(row.total) : row.total}{" "}
+                    {row.currency} {row.total ? parseFloat(row.total.toFixed(2)) : row.total}{" "}
                   </TableCell>
                   <TableCell
                     style={tableStyle}
