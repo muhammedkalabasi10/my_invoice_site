@@ -92,12 +92,12 @@ const ClientList = () => {
               size="lg"
               active
             >
-              Produkt hinzufügen
+              Kunde hinzufügen
             </Button>
           </Box>
         </Box>
         <p style={{ padding: "40px", color: "gray", textAlign: "center" }}>
-          Noch keine Produkte. Klicken Sie auf die Schaltfläche, um ein Produkt
+          Noch keine kunden. Klicken sie auf die schaltfläche, um kunden
           hinzuzufügen.
         </p>
       </div>

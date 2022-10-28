@@ -241,7 +241,7 @@ const Dashboard = () => {
                     </td>
                     <td>{record.paidBy}</td>
                     <td>
-                      {/*moment(record.datePaid).format("MMMM Do YYYY")*/}
+                      {moment(record.datePaid).format("MMMM Do YYYY")}
                     </td>
                     <td>
                       <h3 style={{ color: "#00A86B", fontSize: "14px" }}>
