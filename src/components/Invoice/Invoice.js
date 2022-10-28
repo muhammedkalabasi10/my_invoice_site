@@ -95,7 +95,7 @@ const Invoice = () => {
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
   //buradaki birimler degistirilecek
-  const [units, setUnits] = useState(["QM", "Stück", "km", "litre"]);
+  const [units, setUnits] = useState(["QM", "Stück", "litre"]);
   const [taxes, setTaxes] = useState(["ust 19", "ust 7", "%18", "keine"]);
   const [taxValues, setTaxValues] = useState([19, 7, 18, 0]);
 
