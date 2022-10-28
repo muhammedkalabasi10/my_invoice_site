@@ -5,6 +5,7 @@ import AddClient from "./AddClient";
 import { getClientsByUser } from "../../actions/clientActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
+import { Button, Box } from "@material-ui/core";
 import NoData from "../svgIcons/NoData";
 import Spinner from "../Spinner/Spinner";
 import "./Clients.module.css";
@@ -69,8 +70,35 @@ const ClientList = () => {
         }}
       >
         <NoData />
+        <AddClient
+          open={open}
+          setOpen={setOpen}
+          currentId={currentId}
+          setCurrentId={setCurrentId}
+        />
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "nowrap",
+          }}
+        >
+          <Box sx={{ m: 1 }}>
+            <Button
+              color="primary"
+              onClick={() => setOpen((prev) => !prev)}
+              variant="contained"
+              size="lg"
+              active
+            >
+              Produkt hinzufügen
+            </Button>
+          </Box>
+        </Box>
         <p style={{ padding: "40px", color: "gray", textAlign: "center" }}>
-          No customers yet. Click the plus icon to add customer
+          Noch keine Produkte. Klicken Sie auf die Schaltfläche, um ein Produkt
+          hinzuzufügen.
         </p>
       </div>
     );
