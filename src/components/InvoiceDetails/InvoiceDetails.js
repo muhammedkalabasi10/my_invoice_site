@@ -194,7 +194,7 @@ const InvoiceDetails = () => {
       >
         <Modal open={open} setOpen={setOpen} invoice={invoice} />
         <div className={styles.invoiceLayout} id="pagetodownload">
-          <img src={logo} style={{ maxHeight: "150px" }} alt="" />
+          <img src={logo} style={{ maxWidth:"100%", height:"auto", maxHeight: "150px" }} alt="" />
           <Container>
             <Grid
               container
