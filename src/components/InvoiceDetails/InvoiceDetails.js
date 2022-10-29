@@ -38,6 +38,11 @@ const TableControl = styled.table`
     border-bottom: 1pt solid black;
     border-top: 1pt solid black;
   }
+  @media all and (max-width: 768px) {
+    max-width:90%;
+    display: block;
+    margin: auto;
+  }
 `;
 
 const InvoiceDetails = () => {
