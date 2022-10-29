@@ -24,6 +24,8 @@ import styled from "styled-components";
 
 const TableControl = styled.table`
   border: 1px solid black;
+  max-width: 100%;
+  height: auto;
   & th {
     border: 1px solid black;
     text-align: center;
