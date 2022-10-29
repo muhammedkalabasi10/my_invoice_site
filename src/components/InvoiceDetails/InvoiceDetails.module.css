@@ -344,20 +344,26 @@ input::-webkit-inner-spin-button {
   background-color: green;
 }
 
+.footer{
+  max-width: 100%;
+  height: auto;
+}
+
 @media all and (max-width: 768px) {
 
   .invoiceLayout {
-   width: 97%;
+   width: 100%;
   }
 
   .space {
    width: 50%;
   }
 
-
-  .invoiceSummary div {
+  /*.invoiceSummary div {
     margin-left: 0%;
-   
-  }
+  }*/
 
+  .summaryItem p, h4 {
+    padding: 5px;
+  }
 }

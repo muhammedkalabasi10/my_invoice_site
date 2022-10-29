@@ -326,9 +326,8 @@ const InvoiceDetails = () => {
           </form>
           <img
             src={footer}
-            style={{ maxHeight: "200px" }}
-            width="800px"
-            alt=""
+            className={styles.footer}
+            alt="footer"
           />
         </div>
       </div>
